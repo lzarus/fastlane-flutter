@@ -1,0 +1,7 @@
+FROM lzarus/devops-androidsdk-fastlane-flutter:latest
+LABEL maintainer="hasiniaina.andriatsiory@gmail.com"
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends openssh-server
+RUN mkdir -p -m 0700 ~/.ssh
+RUN ssh-keygen -t rsa -b 4096 -C "DevOps User" -f /root/.ssh/id_rsa -V +1460d
+RUN ssh-keyscan -H ssh.dev.azure.com >> ~/.ssh/known_hosts
